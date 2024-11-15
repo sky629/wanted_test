@@ -6,7 +6,7 @@ from app.config.settings import Settings
 
 settings = Settings()
 
-engine = create_engine(settings.database_url, echo=True)
+engine = create_engine(settings.database_url, echo=False)
 SessionLocal = sessionmaker(engine, expire_on_commit=False, autocommit=False)
 
 RedisClient = redis.StrictRedis(

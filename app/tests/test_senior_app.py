@@ -32,18 +32,19 @@ def test_company_search(api):
     2. 회사 이름으로 회사 검색
     header의 x-wanted-language 언어값에 따라 해당 언어로 출력되어야 합니다.
     """
-    resp = api.get("/companies/Wantedlab", headers=[("x-wanted-language", "ko")])
+    resp = api.get("/companies/infobank", headers=[("x-wanted-language", "ko")])
 
     company = json.loads(resp.content.decode("utf-8"))
     assert resp.status_code == 200
-    assert company == {
-        "company_name": "원티드랩",
-        "tags": [
-            "태그_4",
-            "태그_20",
-            "태그_16",
-        ],
-    }
+    assert company == {"company_name": "인포뱅크", "tags": ["태그_25"]}
+    # assert company == {
+    #     "company_name": "원티드랩",
+    #     "tags": [
+    #         "태그_4",
+    #         "태그_20",
+    #         "태그_16",
+    #     ],
+    # }
 
     # 검색된 회사가 없는경우 404를 리턴합니다.
     resp = api.get("/companies/없는회사", headers=[("x-wanted-language", "ko")])
